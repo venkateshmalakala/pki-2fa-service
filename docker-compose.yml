@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: pki-2fa-service
+    ports:
+      - "8080:8080"
+    volumes:
+      # Map the data volume (Host folder -> Container folder)
+      - seed-data:/data
+      # Map the cron output volume
+      - cron-output:/cron
+    environment:
+      - TZ=UTC
+    restart: unless-stopped
+
+volumes:
+  seed-data:
+  cron-output:
